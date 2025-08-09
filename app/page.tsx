@@ -24,6 +24,7 @@ export default function App() {
     });
   }
 
+
   useEffect(() => {
     listTodos();
   }, []);
@@ -32,6 +33,15 @@ export default function App() {
     client.models.Todo.create({
       content: window.prompt("Todo content"),
     });
+  }
+
+  function createNumber() {
+    const number = window.prompt("Number");
+    if (number) {
+      client.models.Number.create({
+        number,
+      });
+    }
   }
 
   async function handleCalculate() {
@@ -69,6 +79,7 @@ export default function App() {
         />
         <button onClick={handleCalculate}>Calculate</button>
         {result !== null && <p>Result: {result}</p>}
+        <button onClick={createNumber}>Create Number</button>
       </div>
       <div>
         🥳 App successfully hosted. Try creating a new todo.
