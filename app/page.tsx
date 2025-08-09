@@ -14,6 +14,9 @@ const client = generateClient<Schema>();
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [a, setA] = useState("");
+  const [b, setB] = useState("");
+  const [result, setResult] = useState<number | null>(null);
 
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
@@ -31,6 +34,16 @@ export default function App() {
     });
   }
 
+  async function handleCalculate() {
+    const response = await fetch("/api/calculate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ a, b }),
+    });
+    const data = await response.json();
+    setResult(data.result);
+  }
+
   return (
     <main>
       <h1>My todos</h1>
@@ -40,6 +53,23 @@ export default function App() {
           <li key={todo.id}>{todo.content}</li>
         ))}
       </ul>
+      <div style={{ marginTop: 16 }}>
+        <h2>Calculator</h2>
+        <input
+          placeholder="a"
+          value={a}
+          onChange={(e) => setA(e.target.value)}
+          style={{ marginRight: 8 }}
+        />
+        <input
+          placeholder="b"
+          value={b}
+          onChange={(e) => setB(e.target.value)}
+          style={{ marginRight: 8 }}
+        />
+        <button onClick={handleCalculate}>Calculate</button>
+        {result !== null && <p>Result: {result}</p>}
+      </div>
       <div>
         🥳 App successfully hosted. Try creating a new todo.
         <br />
