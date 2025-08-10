@@ -8,6 +8,7 @@ import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import Link from "next/link";
 
 Amplify.configure(outputs);
 
@@ -89,6 +90,19 @@ export default function App() {
         <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
           Review next steps of this tutorial.
         </a>
+        <br />
+        <Link href="/about" style={{ 
+          display: 'inline-block',
+          marginTop: '16px',
+          padding: '8px 16px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          textDecoration: 'none',
+          borderRadius: '4px',
+          fontWeight: '500'
+        }}>
+          About Us
+        </Link>
       </div>
       <button onClick={signOut}>Sign out</button>
     </main>
