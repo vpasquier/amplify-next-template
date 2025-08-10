@@ -9,6 +9,8 @@ import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import Link from "next/link";
+import SubscribeComponent from './SubscribeComponent';
+
 
 Amplify.configure(outputs);
 
@@ -84,6 +86,10 @@ export default function App() {
         {result !== null && <p>Result: {result}</p>}
         <button onClick={createNumber}>Create Number</button>
       </div>
+      <SubscribeComponent
+        priceId="price_1QZ002FZ00000000000000000"
+        description="Premium Plan"
+      />
       <div>
         🥳 App successfully hosted. Try creating a new todo.
         <br />
